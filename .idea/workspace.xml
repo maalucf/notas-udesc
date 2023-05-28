@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="74a5b20a-26d0-47fb-9bb7-82f768542e8a" name="Changes" comment=".">
+    <list default="true" id="74a5b20a-26d0-47fb-9bb7-82f768542e8a" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apresentacao/ResultadoPdf.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/apresentacao/ResultadoPdf.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/apresentacao/TelaPrincipal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/apresentacao/TelaPrincipal.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/apresentacao/TelaSecundaria.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/apresentacao/TelaSecundaria.java" afterDir="false" />
     </list>
@@ -32,20 +33,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "UI_DESIGNER_EDITOR_MODE.PaletteManager.STATE": "left",
-    "UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.STATE": "right",
-    "last_opened_file_path": "C:/Users/maria/OneDrive/Documentos/UDESC/2023-1/POO/Trabalho Final POO - Zap/Trabalho_Disciplina_v2/libs/postgresql-42.2.19.jar",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "project.propVCSSupport.Mappings"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;UI_DESIGNER_EDITOR_MODE.PaletteManager.STATE&quot;: &quot;left&quot;,
+    &quot;UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.STATE&quot;: &quot;right&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/maria/OneDrive/Documentos/UDESC/2023-1/POO/Trabalho Final POO - Zap/Trabalho_Disciplina_v2/libs/postgresql-42.2.19.jar&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.Mappings&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration default="true" type="JetRunConfigurationType">
       <method v="2">

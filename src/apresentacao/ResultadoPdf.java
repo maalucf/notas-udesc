@@ -62,7 +62,7 @@ public class ResultadoPdf {
                 for(int i = 0; i < alunos.size(); i++) {
                     if (alunos.get(i).getDisciplinas().contains(disc)) {
                         table.addCell(new PdfPCell(new Paragraph(alunos.get(i).getNome())));
-                        table.addCell(new PdfPCell(new Paragraph(disc.getNome())));
+                        table.addCell(new PdfPCell(new Paragraph(disc.getNome() + " (" + disc.getCodigo() + ")")));
                         float mediaFinal = alunos.get(i).calcularMediaFinal(disc);
                         float mediaExame = alunos.get(i).calcularMediaExame(disc);
                         String s = "";

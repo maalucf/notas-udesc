@@ -372,7 +372,10 @@ public class TelaPrincipal extends JFrame {
 
 				Aluno aluno = new Aluno(nome, cpf, curso);
 
-				if (sistema.existeCPFAluno(cpf)) {
+				if(nome.isEmpty() || cpf.isEmpty() || curso.isEmpty()) {
+					JOptionPane.showMessageDialog(frame, "Preencha todos os campos!");
+				}
+				else if (sistema.existeCPFAluno(cpf)) {
 					JOptionPane.showMessageDialog(frame, "CPF já cadastrado!");
 				} else {
 					sistema.cadastrarAluno(aluno);
@@ -434,6 +437,10 @@ public class TelaPrincipal extends JFrame {
 
 				if(alunoSelecionado == null) {
 					JOptionPane.showMessageDialog(frame, "Selecione um aluno!");
+				} else if(nome.isEmpty() || cpf.isEmpty() || curso.isEmpty()) {
+					JOptionPane.showMessageDialog(frame, "Preencha todos os campos!");
+				} else if (sistema.existeCPFAluno(cpf) && !cpf.equals(alunoSelecionado.getCpf())) {
+					JOptionPane.showMessageDialog(frame, "CPF já cadastrado!");
 				} else {
 					sistema.editarAluno(alunoSelecionado, nome, curso, cpf);
 
@@ -476,7 +483,10 @@ public class TelaPrincipal extends JFrame {
 
 				Professor professor = new Professor(nome, cpf, departamento, senha);
 
-				if (sistema.existeCPFProfessor(cpf)) {
+				if(nome.isEmpty() || cpf.isEmpty() || departamento.isEmpty() || senha.isEmpty()) {
+					JOptionPane.showMessageDialog(frame, "Preencha todos os campos!");
+				}
+				else if (sistema.existeCPFProfessor(cpf)) {
 					JOptionPane.showMessageDialog(frame, "CPF já cadastrado!");
 				} else {
 					sistema.cadastrarProfessor(professor);
@@ -507,20 +517,20 @@ public class TelaPrincipal extends JFrame {
 
 				Professor professor = sistema.getProfessor(cpf);
 
-				if (professor != null) {
-					if (sistema.logarProfessor(cpf, senha)) {
-						professorLogado = professor;
-						JOptionPane.showMessageDialog(frame, "Professor logado com sucesso!");
-
-						TelaSecundaria secundaria = new TelaSecundaria(professorLogado, sistema);
-						secundaria.frame.setVisible(true);
-
-						frame.dispose();
-					} else {
-						JOptionPane.showMessageDialog(frame, "Senha incorreta!");
-					}
-				} else {
+				if(cpf.isEmpty() || senha.isEmpty()) {
+					JOptionPane.showMessageDialog(frame, "Preencha todos os campos!");
+				} else if (professor == null) {
 					JOptionPane.showMessageDialog(frame, "Professor não encontrado!");
+				} else if (sistema.logarProfessor(cpf, senha)) {
+					professorLogado = professor;
+					JOptionPane.showMessageDialog(frame, "Professor logado com sucesso!");
+
+					TelaSecundaria secundaria = new TelaSecundaria(professorLogado, sistema);
+					secundaria.frame.setVisible(true);
+
+					frame.dispose();
+				} else {
+					JOptionPane.showMessageDialog(frame, "Senha incorreta!");
 				}
 
 				textFieldCpfLogin.setText("");

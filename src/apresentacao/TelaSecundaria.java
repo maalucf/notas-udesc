@@ -630,7 +630,10 @@ public class TelaSecundaria {
 
 				Disciplina disciplina = new Disciplina(nome, codigo, departamento);
 
-				if (sistema.existeCodigoDisciplina(codigo)) {
+				if(nome.isEmpty() || codigo.isEmpty() || departamento.isEmpty()) {
+					JOptionPane.showMessageDialog(frame, "Preencha todos os campos!");
+				}
+				else if (sistema.existeCodigoDisciplina(codigo)) {
 					JOptionPane.showMessageDialog(frame, "Código já cadastrado!");
 				} else {
 					sistema.cadastrarDisciplinaProfessor(disciplina, professorLogado);
@@ -713,19 +716,21 @@ public class TelaSecundaria {
 						model3.addElement(d);
 						model4.addElement(d);
 					}
-
-					textFieldDepartDiscEditar.setText("");
-					textFieldCodigoDiscEditar.setText("");
-					textFieldNomeDiscEditar.setText("");
-					textFieldDepartDisc.setText("");
-					textFieldCodigoDisc.setText("");
-					textFieldNomeDisc.setText("");
-					comboBoxDisciplinas.setSelectedIndex(-1);
-					comboBoxDisciplinasAv.setSelectedIndex(-1);
-					comboBoxDisciplinasAluno.setSelectedIndex(-1);
-					comboBoxDisciplinasAvAluno.setSelectedIndex(-1);
-					comboBoxDisciplinasAlunoExc.setSelectedIndex(-1);
+				} else {
+					JOptionPane.showMessageDialog(frame, "Selecione uma disciplina!");
 				}
+
+				textFieldDepartDiscEditar.setText("");
+				textFieldCodigoDiscEditar.setText("");
+				textFieldNomeDiscEditar.setText("");
+				textFieldDepartDisc.setText("");
+				textFieldCodigoDisc.setText("");
+				textFieldNomeDisc.setText("");
+				comboBoxDisciplinas.setSelectedIndex(-1);
+				comboBoxDisciplinasAv.setSelectedIndex(-1);
+				comboBoxDisciplinasAluno.setSelectedIndex(-1);
+				comboBoxDisciplinasAvAluno.setSelectedIndex(-1);
+				comboBoxDisciplinasAlunoExc.setSelectedIndex(-1);
 			}
 		});
 
@@ -740,7 +745,10 @@ public class TelaSecundaria {
 
 					Disciplina disciplina = new Disciplina(nome, codigo, departamento);
 
-					if(sistema.existeCodigoDisciplina(codigo) && !codigo.equals(disciplinaSelecionado.getCodigo())) {
+					if(nome.isEmpty() || codigo.isEmpty() || departamento.isEmpty()) {
+						JOptionPane.showMessageDialog(frame, "Preencha todos os campos!");
+					}
+					else if (sistema.existeCodigoDisciplina(codigo) && !codigo.equals(disciplinaSelecionado.getCodigo())) {
 						JOptionPane.showMessageDialog(frame, "Código já cadastrado!");
 					} else {
 						sistema.editarDisciplina(disciplinaSelecionado, nome, codigo, departamento, professorLogado);
@@ -773,6 +781,8 @@ public class TelaSecundaria {
 							JOptionPane.showMessageDialog(frame, "Erro ao editar disciplina!");
 						}
 					}
+				} else {
+					JOptionPane.showMessageDialog(frame, "Selecione uma disciplina!");
 				}
 				textFieldDepartDiscEditar.setText("");
 				textFieldCodigoDiscEditar.setText("");
@@ -790,22 +800,26 @@ public class TelaSecundaria {
 
 		btnCadastrarAv.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String nome = textFieldNomeAv.getText();
-				String data = textFieldDataAv.getText();
-				Float peso = Float.parseFloat(textFieldPesoAv.getText());
 				Disciplina disciplinaSelecionado = (Disciplina) comboBoxDisciplinasAv.getSelectedItem();
-				String codigo = disciplinaSelecionado.getCodigo();
-
-				Avaliacao avaliacao = new Avaliacao(codigo, nome, peso, data, 0);
-				List<Avaliacao> avaliacoesEnviadas = new LinkedList<>();
 
 				if(disciplinaSelecionado == null) {
 					JOptionPane.showMessageDialog(frame, "Selecione uma disciplina!");
 				}
 				else {
-					if (sistema.existeAvaliacao(disciplinaSelecionado, nome)) {
+					String nome = textFieldNomeAv.getText();
+					String data = textFieldDataAv.getText();
+					String codigo = disciplinaSelecionado.getCodigo();
+
+					if(nome.isEmpty() || data.isEmpty() || textFieldPesoAv.getText().isEmpty()) {
+						JOptionPane.showMessageDialog(frame, "Preencha todos os campos!");
+					}
+					else if (sistema.existeAvaliacao(disciplinaSelecionado, nome)) {
 						JOptionPane.showMessageDialog(frame, "Avaliação já cadastrada!");
 					} else {
+						Float peso = Float.parseFloat(textFieldPesoAv.getText());
+						Avaliacao avaliacao = new Avaliacao(codigo, nome, peso, data, 0);
+						List<Avaliacao> avaliacoesEnviadas = new LinkedList<>();
+
 						for (int i = 0; i < sistema.getListaAlunos().size(); i++) {
 							if (sistema.getListaAlunos().get(i).getDisciplinas().contains(disciplinaSelecionado)) {
 								Avaliacao aval = new Avaliacao(codigo, nome, peso, data, 0);
@@ -919,6 +933,7 @@ public class TelaSecundaria {
 					for (Aluno aluno : alunosSelecionados) {
 						sistema.cadastrarDisciplinaAluno(disciplinaSelecionada, aluno);
 					}
+					JOptionPane.showMessageDialog(frame, "Aluno(s) cadastrado(s) com sucesso!");
 				}
 				listAlunosDiscNC.setModel(alunoListModel);
 				listAlunosDiscNC.clearSelection();
@@ -980,6 +995,7 @@ public class TelaSecundaria {
 					for (Aluno aluno : alunosSelecionados) {
 						sistema.removerDisciplinaAluno(disciplinaSelecionada, aluno);
 					}
+					JOptionPane.showMessageDialog(frame, "Aluno(s) removido(s) com sucesso!");
 				}
 
 				listAlunosDiscCad.setModel(alunoListModelCad);
