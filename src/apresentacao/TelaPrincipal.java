@@ -432,12 +432,16 @@ public class TelaPrincipal extends JFrame {
 				String cpf = textFieldCpfEditar.getText();
 				String curso = textFieldCursoEditar.getText();
 
-				sistema.editarAluno(alunoSelecionado, nome, curso, cpf);
-
-				if (sistema.getAluno(cpf).getNome().equals(nome) && sistema.getAluno(cpf).getCurso().equals(curso)) {
-					JOptionPane.showMessageDialog(frame, "Aluno editado com sucesso!");
+				if(alunoSelecionado == null) {
+					JOptionPane.showMessageDialog(frame, "Selecione um aluno!");
 				} else {
-					JOptionPane.showMessageDialog(frame,"Erro ao editar aluno!");
+					sistema.editarAluno(alunoSelecionado, nome, curso, cpf);
+
+					if (sistema.getAluno(cpf).getNome().equals(nome) && sistema.getAluno(cpf).getCurso().equals(curso)) {
+						JOptionPane.showMessageDialog(frame, "Aluno editado com sucesso!");
+					} else {
+						JOptionPane.showMessageDialog(frame, "Erro ao editar aluno!");
+					}
 				}
 			}
 		});
@@ -447,12 +451,16 @@ public class TelaPrincipal extends JFrame {
 				Aluno alunoSelecionado = (Aluno) comboBoxAlunos.getSelectedItem();
 				String cpf = textFieldCpfEditar.getText();
 
-				sistema.removerAluno(alunoSelecionado);
-
-				if(sistema.getAluno(cpf) == null) {
-					JOptionPane.showMessageDialog(frame, "Aluno excluído com sucesso!");
+				if(alunoSelecionado == null) {
+					JOptionPane.showMessageDialog(frame, "Selecione um aluno!");
 				} else {
-					JOptionPane.showMessageDialog(frame, "Erro ao excluir aluno!");
+					sistema.removerAluno(alunoSelecionado);
+
+					if(sistema.getAluno(cpf) == null) {
+						JOptionPane.showMessageDialog(frame, "Aluno excluído com sucesso!");
+					} else {
+						JOptionPane.showMessageDialog(frame, "Erro ao excluir aluno!");
+					}
 				}
 			}
 		});

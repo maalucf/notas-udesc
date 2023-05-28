@@ -799,61 +799,65 @@ public class TelaSecundaria {
 				Avaliacao avaliacao = new Avaliacao(codigo, nome, peso, data, 0);
 				List<Avaliacao> avaliacoesEnviadas = new LinkedList<>();
 
-				if(sistema.existeAvaliacao(disciplinaSelecionado, nome)) {
-					JOptionPane.showMessageDialog(frame, "Avaliação já cadastrada!");
+				if(disciplinaSelecionado == null) {
+					JOptionPane.showMessageDialog(frame, "Selecione uma disciplina!");
 				}
 				else {
-					for(int i = 0; i < sistema.getListaAlunos().size(); i++){
-						if(sistema.getListaAlunos().get(i).getDisciplinas().contains(disciplinaSelecionado)){
-							Avaliacao aval = new Avaliacao(codigo, nome, peso, data, 0);
-							avaliacoesEnviadas.add(aval);
-						}
-					}
-					sistema.cadastrarAvaliacao(disciplinaSelecionado, avaliacao, professorLogado, avaliacoesEnviadas);
-
-					if (sistema.getDisciplina(codigo).getAvaliacoes().contains(avaliacao)) {
-						JOptionPane.showMessageDialog(frame, "Avaliação cadastrada com sucesso!");
-
-						List<Aluno> todosAlunos = sistema.getListaAlunos();
-						List<Disciplina> disciplinas = sistema.getListaDisciplinasProfessor();
-
-						tabelaResultados = new TabelaResultados(todosAlunos, disciplinas);
-						tableResultados.setModel(tabelaResultados);
-
-						int coluna = tabelaResultados.getColumnCount();
-						int linha = tabelaResultados.getRowCount();
-
-						for(int i = 0; i < linha; i++) {
-							for (int j = 1; j < coluna; j++) {
-								tabelaResultados.isCellEditable(i, j);
-								TableColumn col = tableResultados.getColumnModel().getColumn(j);
-								col.setMinWidth(150);
+					if (sistema.existeAvaliacao(disciplinaSelecionado, nome)) {
+						JOptionPane.showMessageDialog(frame, "Avaliação já cadastrada!");
+					} else {
+						for (int i = 0; i < sistema.getListaAlunos().size(); i++) {
+							if (sistema.getListaAlunos().get(i).getDisciplinas().contains(disciplinaSelecionado)) {
+								Avaliacao aval = new Avaliacao(codigo, nome, peso, data, 0);
+								avaliacoesEnviadas.add(aval);
 							}
 						}
+						sistema.cadastrarAvaliacao(disciplinaSelecionado, avaliacao, professorLogado, avaliacoesEnviadas);
 
-						TableColumn firstColumn = tableResultados.getColumnModel().getColumn(0);
-						firstColumn.setMinWidth(75);
-						firstColumn.setMaxWidth(100);
-						firstColumn.setResizable(false);
+						if (sistema.getDisciplina(codigo).getAvaliacoes().contains(avaliacao)) {
+							JOptionPane.showMessageDialog(frame, "Avaliação cadastrada com sucesso!");
 
-						int viewportHeight = scrollPaneResultados.getViewport().getHeight();
-						int tableHeight = tableResultados.getPreferredSize().height;
-						int viewportWidth = scrollPaneResultados.getViewport().getWidth();
-						int tableWidth = tableResultados.getPreferredSize().width;
+							List<Aluno> todosAlunos = sistema.getListaAlunos();
+							List<Disciplina> disciplinas = sistema.getListaDisciplinasProfessor();
 
-						if (tableHeight > viewportHeight) {
-							scrollPaneResultados.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+							tabelaResultados = new TabelaResultados(todosAlunos, disciplinas);
+							tableResultados.setModel(tabelaResultados);
+
+							int coluna = tabelaResultados.getColumnCount();
+							int linha = tabelaResultados.getRowCount();
+
+							for (int i = 0; i < linha; i++) {
+								for (int j = 1; j < coluna; j++) {
+									tabelaResultados.isCellEditable(i, j);
+									TableColumn col = tableResultados.getColumnModel().getColumn(j);
+									col.setMinWidth(150);
+								}
+							}
+
+							TableColumn firstColumn = tableResultados.getColumnModel().getColumn(0);
+							firstColumn.setMinWidth(75);
+							firstColumn.setMaxWidth(100);
+							firstColumn.setResizable(false);
+
+							int viewportHeight = scrollPaneResultados.getViewport().getHeight();
+							int tableHeight = tableResultados.getPreferredSize().height;
+							int viewportWidth = scrollPaneResultados.getViewport().getWidth();
+							int tableWidth = tableResultados.getPreferredSize().width;
+
+							if (tableHeight > viewportHeight) {
+								scrollPaneResultados.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+							} else {
+								scrollPaneResultados.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
+							}
+							if (tableWidth > viewportWidth) {
+								scrollPaneResultados.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+							} else {
+								scrollPaneResultados.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+							}
+
 						} else {
-							scrollPaneResultados.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
+							JOptionPane.showMessageDialog(frame, "Erro ao cadastrar avaliação!");
 						}
-						if(tableWidth > viewportWidth) {
-							scrollPaneResultados.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-						} else {
-							scrollPaneResultados.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-						}
-
-					} else {
-						JOptionPane.showMessageDialog(frame, "Erro ao cadastrar avaliação!");
 					}
 				}
 
@@ -876,22 +880,25 @@ public class TelaSecundaria {
 
 				Disciplina disciplinaSelecionada = (Disciplina) comboBoxDisciplinasAluno.getSelectedItem();
 
-				for (Aluno aluno : todosAlunos) {
-					if(!aluno.getDisciplinas().contains(disciplinaSelecionada)) {
-						alunosNaoCadastrados.add(aluno);
+				if (disciplinaSelecionada == null) {
+					JOptionPane.showMessageDialog(frame, "Selecione uma disciplina!");
+				} else {
+					for (Aluno aluno : todosAlunos) {
+						if (!aluno.getDisciplinas().contains(disciplinaSelecionada)) {
+							alunosNaoCadastrados.add(aluno);
+						}
+					}
+
+					Collections.sort(alunosNaoCadastrados, new Comparator<Aluno>() {
+						public int compare(Aluno aluno1, Aluno aluno2) {
+							return aluno1.getNome().compareToIgnoreCase(aluno2.getNome());
+						}
+					});
+
+					for (Aluno aluno : alunosNaoCadastrados) {
+						alunoListModel.addElement(aluno);
 					}
 				}
-
-				Collections.sort(alunosNaoCadastrados, new Comparator<Aluno>() {
-					public int compare(Aluno aluno1, Aluno aluno2) {
-						return aluno1.getNome().compareToIgnoreCase(aluno2.getNome());
-					}
-				});
-
-				for (Aluno aluno : alunosNaoCadastrados) {
-					alunoListModel.addElement(aluno);
-				}
-
 				listAlunosDiscNC.setModel(alunoListModel);
 				listAlunosDiscNC.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 				scrollPaneAlunosDiscNC.revalidate();
@@ -904,10 +911,15 @@ public class TelaSecundaria {
 				Disciplina disciplinaSelecionada = (Disciplina) comboBoxDisciplinasAluno.getSelectedItem();
 				List<Aluno> alunosSelecionados = listAlunosDiscNC.getSelectedValuesList();
 
-				for (Aluno aluno : alunosSelecionados) {
-					sistema.cadastrarDisciplinaAluno(disciplinaSelecionada, aluno);
+				if(disciplinaSelecionada == null) {
+					JOptionPane.showMessageDialog(frame, "Selecione uma disciplina!");
+				} else if(alunosSelecionados.isEmpty()) {
+					JOptionPane.showMessageDialog(frame, "Selecione um ou mais alunos!");
+				} else {
+					for (Aluno aluno : alunosSelecionados) {
+						sistema.cadastrarDisciplinaAluno(disciplinaSelecionada, aluno);
+					}
 				}
-
 				listAlunosDiscNC.setModel(alunoListModel);
 				listAlunosDiscNC.clearSelection();
 				alunoListModel.removeAllElements();
@@ -928,20 +940,24 @@ public class TelaSecundaria {
 
 				Disciplina disciplinaSelecionada = (Disciplina) comboBoxDisciplinasAlunoExc.getSelectedItem();
 
-				for (Aluno aluno : todosAlunos) {
-					if(aluno.getDisciplinas().contains(disciplinaSelecionada)) {
-						alunosCadastrados.add(aluno);
+				if(disciplinaSelecionada == null) {
+					JOptionPane.showMessageDialog(frame, "Selecione uma disciplina!");
+				} else {
+					for (Aluno aluno : todosAlunos) {
+						if(aluno.getDisciplinas().contains(disciplinaSelecionada)) {
+							alunosCadastrados.add(aluno);
+						}
 					}
-				}
 
-				Collections.sort(alunosCadastrados, new Comparator<Aluno>() {
-					public int compare(Aluno aluno1, Aluno aluno2) {
-						return aluno1.getNome().compareToIgnoreCase(aluno2.getNome());
+					Collections.sort(alunosCadastrados, new Comparator<Aluno>() {
+						public int compare(Aluno aluno1, Aluno aluno2) {
+							return aluno1.getNome().compareToIgnoreCase(aluno2.getNome());
+						}
+					});
+
+					for (Aluno aluno : alunosCadastrados) {
+						alunoListModelCad.addElement(aluno);
 					}
-				});
-
-				for (Aluno aluno : alunosCadastrados) {
-					alunoListModelCad.addElement(aluno);
 				}
 
 				listAlunosDiscCad.setModel(alunoListModelCad);
@@ -956,8 +972,14 @@ public class TelaSecundaria {
 				Disciplina disciplinaSelecionada = (Disciplina) comboBoxDisciplinasAlunoExc.getSelectedItem();
 				List<Aluno> alunosSelecionados = listAlunosDiscCad.getSelectedValuesList();
 
-				for (Aluno aluno : alunosSelecionados) {
-					sistema.removerDisciplinaAluno(disciplinaSelecionada, aluno);
+				if(disciplinaSelecionada == null) {
+					JOptionPane.showMessageDialog(frame, "Selecione uma disciplina!");
+				} else if(alunosSelecionados.isEmpty()) {
+					JOptionPane.showMessageDialog(frame, "Selecione um ou mais alunos!");
+				} else {
+					for (Aluno aluno : alunosSelecionados) {
+						sistema.removerDisciplinaAluno(disciplinaSelecionada, aluno);
+					}
 				}
 
 				listAlunosDiscCad.setModel(alunoListModelCad);
@@ -977,6 +999,7 @@ public class TelaSecundaria {
 		btnOkTabelaCad.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Disciplina disciplinaSelecionada = (Disciplina) comboBoxDisciplinasAvAluno.getSelectedItem();
+
 				if(disciplinaSelecionada != null) {
 					List<Aluno> todosAlunos = sistema.getListaAlunos();
 					List<Aluno> alunosCadastrados = new ArrayList<Aluno>();
@@ -1033,6 +1056,8 @@ public class TelaSecundaria {
 							scrollPaneAval.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 						}
 					}
+				} else {
+					JOptionPane.showMessageDialog(frame, "Selecione uma disciplina!");
 				}
 				sistema.mostrarAlunos();
 			}
@@ -1055,7 +1080,6 @@ public class TelaSecundaria {
 			public void actionPerformed(ActionEvent e) {
 				List<Aluno> todosAlunos = sistema.getListaAlunos();
 				List<Disciplina> disciplinas = sistema.getListaDisciplinasProfessor();
-
 				Collections.sort(todosAlunos, new Comparator<Aluno>() {
 					public int compare(Aluno aluno1, Aluno aluno2) {
 						return aluno1.getNome().compareToIgnoreCase(aluno2.getNome());
