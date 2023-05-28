@@ -568,18 +568,6 @@ public class TelaSecundaria {
 		btnOkTabelaCad.setBounds(416, 69, 55, 21);
 		backgroundCadastroAvalAlunos.add(btnOkTabelaCad);
 
-		Disciplina disc = new Disciplina("POO", "111", "BCC");
-		if(!sistema.existeCodigoDisciplina(disc.getCodigo())) {
-			sistema.cadastrarDisciplinaProfessor(disc, professorLogado);
-		}
-		for(int i = 0; i < 10; i++) {
-			Avaliacao aval = new Avaliacao(disc.getCodigo(), "P"+i, 10, "1", 0);
-			List<Avaliacao> avaliacoes = new ArrayList<>();
-			avaliacoes.add(aval);
-			if(!sistema.existeAvaliacao(disc, aval.getNome()))
-				sistema.cadastrarAvaliacao(disc, aval, professorLogado, avaliacoes);
-		}
-
 		//Atualizar comboBox disciplinas do professor
 		List<Disciplina> disciplinasCadastradas = sistema.getListaDisciplinasProfessor();
 

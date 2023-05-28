@@ -352,16 +352,6 @@ public class TelaPrincipal extends JFrame {
 		backgroundLoginProf.add(labelSenhaProf_1);
 		labelSenhaProf_1.setForeground(new Color(19, 80, 130));
 		labelSenhaProf_1.setFont(new Font("Roboto Cn", Font.PLAIN, 14));
-		
-		Professor prof = new Professor("Rui", "111", "BCC", "111");
-		Aluno al = new Aluno("Malu", "111", "BCC");
-		Aluno al2 = new Aluno("Enzo", "222", "BCC");
-
-		if(!sistema.existeCPFProfessor(prof.getCpf())) {
-			sistema.cadastrarAluno(al);
-			sistema.cadastrarAluno(al2);
-			sistema.cadastrarProfessor(prof);
-		}
 
 		//ABA ALUNO
 		btnCadastrarAluno.addActionListener(new ActionListener() {
