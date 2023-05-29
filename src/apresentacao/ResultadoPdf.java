@@ -47,7 +47,8 @@ public class ResultadoPdf {
             doc.add(p);
 
             // Criando uma tabela
-            PdfPTable table = new PdfPTable(3);
+            float[] pointColumnWidths = {150F, 150F, 200F};
+            PdfPTable table = new PdfPTable(pointColumnWidths);
 
             // Adicionando células à tabela
             PdfPCell cel1 = new PdfPCell(new Paragraph("Nome Aluno"));

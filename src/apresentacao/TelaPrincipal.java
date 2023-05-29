@@ -435,11 +435,34 @@ public class TelaPrincipal extends JFrame {
 					sistema.editarAluno(alunoSelecionado, nome, curso, cpf);
 
 					if (sistema.getAluno(cpf).getNome().equals(nome) && sistema.getAluno(cpf).getCurso().equals(curso)) {
+						DefaultComboBoxModel<Aluno> model = (DefaultComboBoxModel<Aluno>) comboBoxAlunos.getModel();
+						List<Aluno> alunosCadastrados = sistema.getListaAlunos();
+
+						Collections.sort(alunosCadastrados, new Comparator<Aluno>() {
+							public int compare(Aluno aluno1, Aluno aluno2) {
+								return aluno1.getNome().compareToIgnoreCase(aluno2.getNome());
+							}
+						});
+
+						model.removeAllElements();
+
+						for (Aluno a : alunosCadastrados) {
+							model.addElement(a);
+						}
+
 						JOptionPane.showMessageDialog(frame, "Aluno editado com sucesso!");
 					} else {
 						JOptionPane.showMessageDialog(frame, "Erro ao editar aluno!");
 					}
 				}
+
+				textFieldCpfEditar.setText("");
+				textFieldNomeEditar.setText("");
+				textFieldCursoEditar.setText("");
+				textFieldCpfAluno.setText("");
+				textFieldNomeAluno.setText("");
+				textFieldCursoAluno.setText("");
+				comboBoxAlunos.setSelectedIndex(-1);
 			}
 		});
 
@@ -454,11 +477,33 @@ public class TelaPrincipal extends JFrame {
 					sistema.removerAluno(alunoSelecionado);
 
 					if(sistema.getAluno(cpf) == null) {
+						DefaultComboBoxModel<Aluno> model = (DefaultComboBoxModel<Aluno>) comboBoxAlunos.getModel();
+						List<Aluno> alunosCadastrados = sistema.getListaAlunos();
+
+						Collections.sort(alunosCadastrados, new Comparator<Aluno>() {
+							public int compare(Aluno aluno1, Aluno aluno2) {
+								return aluno1.getNome().compareToIgnoreCase(aluno2.getNome());
+							}
+						});
+
+						model.removeAllElements();
+
+						for (Aluno a : alunosCadastrados) {
+							model.addElement(a);
+						}
 						JOptionPane.showMessageDialog(frame, "Aluno excluído com sucesso!");
 					} else {
 						JOptionPane.showMessageDialog(frame, "Erro ao excluir aluno!");
 					}
 				}
+
+				textFieldCpfEditar.setText("");
+				textFieldNomeEditar.setText("");
+				textFieldCursoEditar.setText("");
+				textFieldCpfAluno.setText("");
+				textFieldNomeAluno.setText("");
+				textFieldCursoAluno.setText("");
+				comboBoxAlunos.setSelectedIndex(-1);
 			}
 		});
 		//FIM ABA ALUNO

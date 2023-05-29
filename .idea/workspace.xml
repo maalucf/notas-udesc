@@ -4,8 +4,8 @@
     <list default="true" id="74a5b20a-26d0-47fb-9bb7-82f768542e8a" name="Changes" comment=".">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/relatorio.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/relatorio.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apresentacao/ResultadoPdf.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/apresentacao/ResultadoPdf.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/apresentacao/TelaPrincipal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/apresentacao/TelaPrincipal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apresentacao/TelaSecundaria.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/apresentacao/TelaSecundaria.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -101,26 +101,6 @@
           <properties class="java.lang.NullPointerException" package="java.lang" />
           <option name="timeStamp" value="1" />
         </breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/dados/Aluno.java</url>
-          <line>108</line>
-          <option name="timeStamp" value="71" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/dados/Aluno.java</url>
-          <line>107</line>
-          <option name="timeStamp" value="72" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/dados/Aluno.java</url>
-          <line>106</line>
-          <option name="timeStamp" value="73" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/dados/Aluno.java</url>
-          <line>105</line>
-          <option name="timeStamp" value="74" />
-        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
     <pin-to-top-manager>
